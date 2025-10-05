@@ -1,0 +1,38 @@
+/*
+You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1.
+If a string is longer than the other, append the additional letters onto the end of the merged string.
+Return the merged string.
+*/
+
+class Solution {
+    
+    func mergeAlternately(_ word1: String, _ word2: String) -> String {
+        
+  
+        var mergedCharacters: [Character] = []
+        
+        var i = 0 
+        var j = 0 
+        
+        let count1 = word1.count
+        let count2 = word2.count
+        
+        while i < count1 || j < count2 {
+            
+            if i < count1 {
+                let index1 = word1.index(word1.startIndex, offsetBy: i)
+                mergedCharacters.append(word1[index1])
+                i += 1
+            }
+            
+            if j < count2 {
+                let index2 = word2.index(word2.startIndex, offsetBy: j)
+                mergedCharacters.append(word2[index2])
+                j += 1
+            }
+        }
+        
+        return String(mergedCharacters)
+    }
+}
+
