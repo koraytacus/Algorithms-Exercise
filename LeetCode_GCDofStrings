@@ -1,0 +1,53 @@
+
+/*
+For two strings s and t, we say "t divides s" if and only if s = t + t + t + ... + t + t (i.e., t is concatenated with itself one or more times).
+
+Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
+
+ 
+
+Example 1:
+
+Input: str1 = "ABCABC", str2 = "ABC"
+Output: "ABC"
+Example 2:
+
+Input: str1 = "ABABAB", str2 = "ABAB"
+Output: "AB"
+Example 3:
+
+Input: str1 = "LEET", str2 = "CODE"
+Output: ""
+
+
+*/
+class Solution {
+    func gcdOfStrings(_ str1: String, _ str2: String) -> String {
+        // 1. Ortak Bölenin Varlığını Kontrol Etme
+        // Ortak bölenin var olması için str1 + str2 eşit olmalıdır str2 + str1'e.
+        if str1 + str2 != str2 + str1 {
+            return ""
+        }
+        
+        // 2. Uzunlukların GCD'sini Bulma (Öklid Algoritması)
+        var a = str1.count
+        var b = str2.count
+        
+        // Euclidean Algorithm (Öklid Algoritması)
+        while b != 0 {
+            let temp = b
+            b = a % b
+            a = temp
+        }
+        
+        // 'a' değişkeni artık GCD'yi (Ortak Bölenin Uzunluğunu) tutar.
+        let gcdLength = a
+        
+        // String'i GCD uzunluğuna göre kesme.
+        // str1.index(str1.startIndex, offsetBy: gcdLength) ile bitiş indeksi belirlenir.
+        
+        let endIndex = str1.index(str1.startIndex, offsetBy: gcdLength)
+        
+        return String(str1[..<endIndex])
+    }
+}
